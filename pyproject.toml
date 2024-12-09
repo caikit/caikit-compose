@@ -12,7 +12,7 @@ classifiers=[
     "License :: OSI Approved :: Apache Software License"
 ]
 dependencies = [
-    "caikit>=0.25,<0.26",
+    "caikit>=0.25,<0.28",
 ]
 
 [project.optional-dependencies]
