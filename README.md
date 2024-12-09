@@ -83,6 +83,24 @@ The key to the functionality of `groupings` is the ability to store a given grou
 
 When subscribing an [actor](#actors) to topics on the [message queue](#message-queue), a `SubscriptionManager` is used to bind the `actor`'s inference function(s) to the appropriate groupings. It is the `SubscriptionManager` which takes care of adding messages to the `grouping` and dispatching the result to the actor if (and only if) a group completes based on the input message.
 
-## Minimal Example
+## Examples
 
+You can find all the examples in [./examples](./examples/). Here's the simplest "Hello World" to get you started:
 
+```py
+from caikit.interfaces.common.data_model import StrSequence
+from caikit_compose import MQ_FACTORY, Message
+
+mq = MQ_FACTORY.construct({"type":"LOCAL"})
+mq.create_topic("input")
+
+def greet(msg: Message):
+    for name in msg.unwrapped.values:
+        print(f"Hello {name}!")
+
+mq.subscribe("input", "", greet)
+
+while True:
+    x = input("X: ")
+    mq.publish("input", Message.from_data(StrSequence(x.split(","))))
+```
