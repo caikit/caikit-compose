@@ -90,7 +90,7 @@ def test_close_grouping():
         mgr.close()
         close_mock.assert_called_once()
         actor_mock.assert_called_once_with(stub_message)
-        assert grouping_mock.notify_not_busy.called_once()
+        grouping_mock.notify_not_busy.assert_called_once()
 
 
 def test_group_notify_not_busy():
@@ -102,9 +102,9 @@ def test_group_notify_not_busy():
     grouping_factory_mock = MagicMock()
     grouping_mock = grouping_factory_mock()
     stub_message = "MESSAGE"
-    handle_message = MagicMock(return_value=stub_message)
+    add_message = MagicMock(return_value=stub_message)
     actor_mock = MagicMock()
-    grouping_mock.handle_message = handle_message
+    grouping_mock.add_message = add_message
     with patch.object(GROUPING_FACTORY, "construct", grouping_factory_mock):
         mgr = SubscriptionManager(
             subscription_id="subid",
@@ -115,8 +115,8 @@ def test_group_notify_not_busy():
             grouping_type=IndividualGrouping.name,
         )
         mgr.handle_message(make_message("stub"))
-        assert handle_message.called_once()
-        assert grouping_mock.notify_not_busy.called_once()
+        add_message.assert_called_once()
+        grouping_mock.notify_not_busy.assert_called_once()
 
 
 def test_processing_messages():
