@@ -1,0 +1,3 @@
+[run]
+omit =
+    caikit_compose/version.py
