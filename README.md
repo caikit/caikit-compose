@@ -2,11 +2,11 @@
 
 The `caikit-compose` project provides a framework for composing multiple `caikit` modules into cohesive realtime AI applications. The project consists of the following core abstractions:
 
-* [Agents](#agents): An `agent` in `caikit-compose` is analogous to a `module` in `caikit`. It performs one or more functions when stimulated by inbound data. Unlike a `module`, an `agent` is responsible for subscribing to its own input data and sending its output data using the [message queue](#message-queue).
+* [Actors](#actors): An `actor` in `caikit-compose` is analogous to a `module` in `caikit`. It performs one or more functions when stimulated by inbound data. Unlike a `module`, an `actor` is responsible for subscribing to its own input data and sending its output data using the [message queue](#message-queue).
 
-* [Message Queue](#message-queue): The Message Queue (often shortened to `mq`) is the central backbone of a `caikit-compose` application. It implements a basic [pub/sub pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) where messages are published to topics which have subscribed listeners. Canonically, those listeners will be [agents](#agents), but can also be any callable as needed by application logic.
+* [Message Queue](#message-queue): The Message Queue (often shortened to `mq`) is the central backbone of a `caikit-compose` application. It implements a basic [pub/sub pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) where messages are published to topics which have subscribed listeners. Canonically, those listeners will be [actors](#actors), but can also be any callable as needed by application logic.
 
-* [Grouping](#grouping): The real power of `caikit-compose` comes from its ability to manage groups of messages when presenting them to an [agent](#agents). Some AI functions may require multiple pieces of input data (e.g. raw text plus extracted keywords) and/or multiple sequential pieces of data (e.g. sequence of sentiment scores). With `groupings`, `caikit-compose` implements an extensible framework for managing how messages can be collected to form atomic groups that `actors` can take action on.
+* [Grouping](#grouping): The real power of `caikit-compose` comes from its ability to manage groups of messages when presenting them to an [actor](#actors). Some AI functions may require multiple pieces of input data (e.g. raw text plus extracted keywords) and/or multiple sequential pieces of data (e.g. sequence of sentiment scores). With `groupings`, `caikit-compose` implements an extensible framework for managing how messages can be collected to form atomic groups that `actors` can take action on.
 
 ## Actors
 
